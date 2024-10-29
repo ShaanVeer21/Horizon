@@ -5,16 +5,16 @@ import Product from '../components/Product';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import { listProducts } from '../actions/productActions';
- 
+
 function HomeScreen() {
   const dispatch = useDispatch();
   const productList = useSelector((state) => state.productList);
   const { error, loading, products } = productList;
- 
+
   useEffect(() => {
     dispatch(listProducts());
   }, [dispatch]);
- 
+
   return (
     <div>
       <h1>Latest Projects</h1>
@@ -34,5 +34,5 @@ function HomeScreen() {
     </div>
   );
 }
- 
+
 export default HomeScreen;
