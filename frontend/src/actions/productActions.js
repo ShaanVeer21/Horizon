@@ -22,8 +22,8 @@ import axios from "axios"
       dispatch({
         type: PRODUCT_LIST_FAIL,
         payload:
-          error.response && error.response.data.message
-            ? error.response.data.message
+          error.response && error.response.data.detail
+            ? error.response.data.detail
             : error.message,
       });
     }
@@ -43,8 +43,8 @@ import axios from "axios"
       dispatch({
         type: PRODUCT_DETAILS_FAIL,
         payload:
-          error.response && error.response.data.message
-            ? error.response.data.message
+          error.response && error.response.data.detail
+            ? error.response.data.detail
             : error.message,
       });
     }

@@ -17,7 +17,7 @@ function HomeScreen() {
 
   return (
     <div>
-      <h1>Latest Projects</h1>
+      <h1>Latest Products</h1>
       {loading ? (
         <Loader />
       ) : error ? (
