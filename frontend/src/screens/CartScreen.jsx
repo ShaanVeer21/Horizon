@@ -26,7 +26,9 @@ function CartScreen() {
   }, [dispatch , productId, qty] )
 
   const removeFromCartHandler = (id) =>{
-    dispatch(removeFromCart(id))
+    if(window.confirm('Are you sure you want to delete this User?')){
+      dispatch(removeFromCart(id))
+    }
   }
 
   const checkoutHandler = () =>{
