@@ -5,9 +5,19 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 
 class ProductSerializer(serializers.ModelSerializer):
+    image = serializers.SerializerMethodField()
+    
     class Meta:
         model = Product
         fields = '__all__'
+    
+    def get_image(self, obj):
+        if obj.image:
+            try:
+                return obj.image.url
+            except:
+                return str(obj.image)
+        return ''
 
 
 class UserSerializer(serializers.ModelSerializer):

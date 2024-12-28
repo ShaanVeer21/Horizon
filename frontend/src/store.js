@@ -1,14 +1,16 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import { thunk } from 'redux-thunk';
-import { productListReducers, productDetailsReducers, productDeleteReducers } from './reducers/productReducers';
+import { productListReducers, productDetailsReducers, productDeleteReducers, productCreateReducers, productUpdateReducers } from './reducers/productReducers';
 import { cartReducer } from './reducers/cartReducers';
 import { userDeleteReducer, userDetailsReducer, userListReducer, userLoginReducer, userRegisterReducer, userUpdateProfileReducer, userUpdateReducer } from './reducers/userReducers' 
-import { orderCreateReducer, orderDetailsReducer, orderListMyReducer, orderPayReducer } from './reducers/orderReducers'
+import { orderCreateReducer, orderDeliverReducer, orderDetailsReducer, orderListMyReducer, orderListReducer, orderPayReducer } from './reducers/orderReducers'
 
 const reducer = combineReducers({
   productList: productListReducers,
   productDetails: productDetailsReducers,
   productDelete : productDeleteReducers,
+  productCreate : productCreateReducers,
+  productUpdate : productUpdateReducers,
   cart : cartReducer,
   userLogin : userLoginReducer,
   userRegister : userRegisterReducer,
@@ -21,6 +23,8 @@ const reducer = combineReducers({
   orderDetails : orderDetailsReducer,
   orderPay : orderPayReducer,
   orderListMy : orderListMyReducer,
+  orderList : orderListReducer,
+  orderDeliver : orderDeliverReducer,
 });
 
 const cartItemsFromStorage = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : []
