@@ -31,12 +31,11 @@ class ProductSerializer(serializers.ModelSerializer):
     #             return str(obj.image)
     #     return ''
     def get_image(self, obj):
-        request = self.context.get('request')
         if obj.image:
-            filename = obj.image.name.split('/')[-1]  # airpods.jpg
-            url = f"/static/images/{filename}"
-            return request.build_absolute_uri(url) if request else url
+            filename = obj.image.name.split('/')[-1]
+            return f'https://horizon-backend-6mbl.onrender.com/static/images/{filename}'
         return ''
+
 
 
 
