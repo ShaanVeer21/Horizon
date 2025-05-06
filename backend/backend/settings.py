@@ -96,7 +96,17 @@ CORS_ALLOWED_ORIGINS = [
 ]
 CORS_ALLOW_CREDENTIALS = True
 
-# CSRF Trusted Origins (for secure POST/PUT from Vercel)
+# If you are using axios/fetch with credentials (cookies/tokens), you might also need this:
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'authorization',
+    'content-type',
+    'origin',
+    'x-csrftoken',
+    'x-requested-with',
+]
+
+# CSRF Trusted Origins
 CSRF_TRUSTED_ORIGINS = [
     "https://horizon-one-chi.vercel.app",
 ]
