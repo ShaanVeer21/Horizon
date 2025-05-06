@@ -84,11 +84,18 @@ USE_I18N = True
 USE_TZ = True
 
 # Static & Media
+# Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_DIRS = [BASE_DIR / 'backend' / 'static']  # Explicitly tell Django where your static files are
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # Where collectstatic will gather them
 
+# Media files (if you use uploads later)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+# WhiteNoise settings (to serve static files in production)
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 # CORS configuration
 CORS_ALLOWED_ORIGINS = [

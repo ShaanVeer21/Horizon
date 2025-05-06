@@ -16,5 +16,5 @@ urlpatterns = [
     path('api/orders/', include('base.urls.order_urls')),
 ]
 
-# Serve media files in development
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# Only in development — safe to leave during prod if using WhiteNoise or Render
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
