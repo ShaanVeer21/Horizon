@@ -9,8 +9,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Env variables
 SECRET_KEY = os.environ.get("SECRET_KEY", "your-default-dev-secret-key")
 DEBUG = os.environ.get("DEBUG", "False") == "True"
-ALLOWED_HOSTS = ["*"]
 
+ALLOWED_HOSTS = [
+    "horizon-backend-6mbl.onrender.com",
+    "localhost",
+    "127.0.0.1"
+]
 
 # Apps
 INSTALLED_APPS = [
@@ -57,7 +61,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'backend.wsgi.application'
 
-# Database (SQLite or PostgreSQL via dj_database_url)
+# Database
 DATABASES = {
     'default': dj_database_url.config(
         default=f'sqlite:///{BASE_DIR / "db.sqlite3"}',
@@ -79,18 +83,23 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# Static files
+# Static & Media
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-# CORS (React/Vercel frontend)
+# CORS configuration
 CORS_ALLOWED_ORIGINS = [
-    "https://horizon-frontend.vercel.app",
+    "https://horizon-one-chi.vercel.app",
 ]
 CORS_ALLOW_CREDENTIALS = True
+
+# CSRF Trusted Origins (for secure POST/PUT from Vercel)
+CSRF_TRUSTED_ORIGINS = [
+    "https://horizon-one-chi.vercel.app",
+]
 
 # REST Framework & JWT
 REST_FRAMEWORK = {
@@ -112,9 +121,10 @@ SIMPLE_JWT = {
     "TOKEN_TYPE_CLAIM": "token_type",
 }
 
+# Auto field
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Security settings for production
+# Security (important for Render deployment)
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 SECURE_SSL_REDIRECT = not DEBUG
 SESSION_COOKIE_SECURE = not DEBUG
