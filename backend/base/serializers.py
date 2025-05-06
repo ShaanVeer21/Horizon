@@ -30,13 +30,18 @@ class ProductSerializer(serializers.ModelSerializer):
     #         except:
     #             return str(obj.image)
     #     return ''
+
+    # def get_image(self, obj):
+    #     if obj.image:
+    #         filename = obj.image.name.split('/')[-1]
+    #         return f'https://horizon-backend-6mbl.onrender.com/static/images/{filename}'
+    #     return ''
+
     def get_image(self, obj):
-        if obj.image:
-            filename = obj.image.name.split('/')[-1]
-            return f'https://horizon-backend-6mbl.onrender.com/static/images/{filename}'
-        return ''
-
-
+        request = self.context.get('request')
+        if request:
+            return request.build_absolute_uri(obj.image.url)
+        return obj.image.url
 
 
 
@@ -82,9 +87,17 @@ class ShippingAddressSerializer(serializers.ModelSerializer):
 
 
 class OrderItemSerializer(serializers.ModelSerializer):
+    product = serializers.SerializerMethodField()
+
     class Meta:
         model = OrderItem
         fields = '__all__'
+
+    def get_product(self, obj):
+        request = self.context.get('request')
+        serializer = ProductSerializer(obj.product, context={'request': request})
+        return serializer.data
+
 
 
 class OrderSerializer(serializers.ModelSerializer):
