@@ -23,13 +23,19 @@ class ProductSerializer(serializers.ModelSerializer):
         serializer = ReviewSerializer(reviews , many = True)
         return(serializer.data)
     
+    # def get_image(self, obj):
+    #     if obj.image:
+    #         try:
+    #             return obj.image.url
+    #         except:
+    #             return str(obj.image)
+    #     return ''
     def get_image(self, obj):
         if obj.image:
-            try:
-                return obj.image.url
-            except:
-                return str(obj.image)
+            filename = obj.image.name.split('/')[-1]  # Gets 'airpods.jpg'
+            return f'https://horizon-backend-6mbl.onrender.com/static/images/{filename}'
         return ''
+
 
 
 class UserSerializer(serializers.ModelSerializer):
