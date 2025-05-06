@@ -31,17 +31,13 @@ class ProductSerializer(serializers.ModelSerializer):
     #             return str(obj.image)
     #     return ''
 
-    # def get_image(self, obj):
-    #     if obj.image:
-    #         filename = obj.image.name.split('/')[-1]
-    #         return f'https://horizon-backend-6mbl.onrender.com/static/images/{filename}'
-    #     return ''
-
     def get_image(self, obj):
-        request = self.context.get('request')
-        if request:
-            return request.build_absolute_uri(obj.image.url)
-        return obj.image.url
+        if obj.image:
+            filename = obj.image.name.split('/')[-1]
+            return f'https://horizon-backend-6mbl.onrender.com/static/images/{filename}'
+        return ''
+
+
 
 
 
