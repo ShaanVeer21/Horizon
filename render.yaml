@@ -2,13 +2,22 @@ services:
   - type: web
     name: horizon-backend
     env: python
-    buildCommand: pip install -r backend/requirements.txt
+    buildCommand: |
+      cd backend
+      pip install -r requirements.txt
+      python manage.py collectstatic --noinput
     startCommand: gunicorn backend.wsgi:application
     envVars:
       - key: DJANGO_SETTINGS_MODULE
         value: backend.settings
       - key: PYTHON_VERSION
         value: 3.11
+      - key: SECRET_KEY
+        value: your-production-secret-key
+      - key: DEBUG
+        value: False
+      - key: ALLOWED_HOSTS
+        value: horizon-backend.onrender.com,horizon-frontend.vercel.app
     plan: free
     buildFilter:
       paths:
