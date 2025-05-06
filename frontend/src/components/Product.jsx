@@ -7,7 +7,7 @@ function Product({product}) {
   return (
     <Card className="my-3 p-3 rounded ">
         <Link to={`/products/${product._id}`}>
-            <Card.Img src={product.image}></Card.Img>
+            <Card.Img src={`https://horizon-backend-6mbl.onrender.com/static/images/${product.image}`} />
         </Link>
         <Card.Body>
             <Link to={`/products/${product._id}`} >
