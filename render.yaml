@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: horizon-backend
+    env: python
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: gunicorn backend.wsgi:application
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: backend.settings
+      - key: PYTHON_VERSION
+        value: 3.11
+    plan: free
+    buildFilter:
+      paths:
+        - backend/**
+
+  - type: web
+    name: horizon-frontend
+    env: static
+    buildCommand: cd frontend && npm install && npm run build
+    staticPublishPath: frontend/dist
+    plan: free
+    buildFilter:
+      paths:
+        - frontend/**
