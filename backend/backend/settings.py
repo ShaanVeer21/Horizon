@@ -29,9 +29,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
+# Middleware
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # WhiteNoise before SecurityMiddleware
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -83,27 +84,29 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# Static & Media
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / 'backend' / 'static']  # Explicitly tell Django where your static files are
-STATIC_ROOT = BASE_DIR / 'staticfiles'  # Where collectstatic will gather them
 
-# Media files (if you use uploads later)
+# ✅ Correct static dir for backend/static/images/...
+STATICFILES_DIRS = [
+    BASE_DIR / 'static'
+]
+
+# ✅ Collected files go here (used by collectstatic)
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# ✅ WhiteNoise storage for production
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Media files (if needed later)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-# WhiteNoise settings (to serve static files in production)
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-
-# CORS configuration
+# CORS
 CORS_ALLOWED_ORIGINS = [
     "https://horizon-one-chi.vercel.app",
 ]
 CORS_ALLOW_CREDENTIALS = True
-
-# If you are using axios/fetch with credentials (cookies/tokens), you might also need this:
 CORS_ALLOW_HEADERS = [
     'accept',
     'authorization',
@@ -113,12 +116,12 @@ CORS_ALLOW_HEADERS = [
     'x-requested-with',
 ]
 
-# CSRF Trusted Origins
+# CSRF
 CSRF_TRUSTED_ORIGINS = [
     "https://horizon-one-chi.vercel.app",
 ]
 
-# REST Framework & JWT
+# DRF + JWT
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -138,10 +141,10 @@ SIMPLE_JWT = {
     "TOKEN_TYPE_CLAIM": "token_type",
 }
 
-# Auto field
+# Misc
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Security (important for Render deployment)
+# Render production security
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 SECURE_SSL_REDIRECT = not DEBUG
 SESSION_COOKIE_SECURE = not DEBUG
