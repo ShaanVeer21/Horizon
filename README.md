@@ -1,17 +1,48 @@
-🛒 Horizon – Full-Stack E-Commerce Web Application
-Project Summary:
+# Horizon — Full-Stack E-Commerce Web Application
 
-Horizon is a production-grade, full-stack e-commerce platform developed using Django for the backend and React with Redux for the frontend. The application enables users to browse products, manage carts, place orders, write reviews, and track order history. Admins have access to a custom dashboard to manage inventory, orders, and users.
+Horizon is a full-stack e-commerce web application built to demonstrate end-to-end product development, covering backend APIs, authentication, business logic, and a responsive, state-driven frontend.
 
-The platform is built with modular, scalable architecture and secured with JWT authentication, featuring a responsive UI and real-time state management.
+The platform allows users to browse products, manage shopping carts, place orders, write reviews, and track order history. An admin dashboard enables administrators to manage products, users, and orders.
 
-🧰 Tech Stack:
-Frontend	React, Redux, React Bootstrap
-Backend	Django, Django REST Framework (DRF), JWT Auth
-Database	SQLite
-Dev Tools	Postman, Git, GitHub
-Hosting	Frontend – Vercel
-Backend – (local/deployed separately)
+---
 
-🌐 Live Demo:
+## Features
+
+### User Features
+- JWT-based user authentication
+- Product browsing with detailed product views
+- Shopping cart management
+- Order placement and order history tracking
+- Product reviews and ratings
+
+### Admin Features
+- Admin dashboard for managing products, users, and orders
+- Inventory management
+- Order status updates
+
+---
+
+## Tech Stack
+
+### Frontend
+- React
+- Redux
+- React Bootstrap
+
+### Backend
+- Django
+- Django REST Framework (DRF)
+- JWT Authentication
+
+### Database
+- SQLite (development)
+
+### Tools & Services
+- Git & GitHub
+- Postman
+- Frontend hosting: Vercel
+
+---
+
+## Live Demo
 🔗 https://horizon-one-chi.vercel.app
